@@ -38,9 +38,9 @@ public class GameControl : MonoBehaviour
         fb.Expire();
     }
 
-    public void CreateFirework(Vector2 pos, float life =5f){
-        score++;
-        Firework fw = Instantiate(FireworkPrefabs[0]);
+    public void CreateFirework(Vector2 pos, float life = 5f){
+        score = Mathf.Min(score + 1, 35);
+        Firework fw = Instantiate(FireworkPrefabs[UnityEngine.Random.Range(0, FireworkPrefabs.Count)]);
         fw.Init(pos, life);
     }
 
