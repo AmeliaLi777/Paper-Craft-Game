@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class Destination : MonoBehaviour
     }
 
     public void OnSuccess(){
-        Debug.Log("taaaadaaaaa");
+        Debug.Log("Hit!");
+        gm.CreateFirework(Position, 5f);
         Destroy(transform.parent.gameObject);
     }
 

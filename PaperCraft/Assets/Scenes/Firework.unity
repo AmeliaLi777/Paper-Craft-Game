@@ -172,7 +172,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -1000
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e3735a3d85d0741b898e5640f504cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
   ActiveFireballs: []
   Range:
     serializedVersion: 2
@@ -312,11 +313,14 @@ MonoBehaviour:
     y: -5
     width: 20
     height: 10
-  InitSpeed: 20
-  MinSpeed: 10
-  Acceleration: 2.5
+  InitSpeed: 25
+  MinSpeed: 15
+  Drag: 0.25
   HitThreshold: 1
-  FireworkPrefab: {fileID: 1493009488180174845, guid: 2afe4a003c857d74c83020612de521c4, type: 3}
+  MainCamera: {fileID: 963194227}
+  FireballPrefab: {fileID: 1493009488180174845, guid: 2afe4a003c857d74c83020612de521c4, type: 3}
+  FireworkPrefabs:
+  - {fileID: 3171636917415385054, guid: 423993584ed1c8e489f9e071820e9f17, type: 3}
 --- !u!4 &1279704145
 Transform:
   m_ObjectHideFlags: 0
@@ -344,6 +348,10 @@ PrefabInstance:
       value: Eff_FireWorks_07_oneShot
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -390,6 +398,30 @@ PrefabInstance:
     - target: {fileID: 400006, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900002, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900004, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900006, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900008, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900010, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900012, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a206a7c536e6444dbc7ffa427313cb9, type: 3}

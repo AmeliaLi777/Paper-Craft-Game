@@ -57,7 +57,7 @@ public class Fireball : MonoBehaviour
     {
         // Move
         position += speed * Time.deltaTime * direction;
-        speed -= gm.Acceleration * Time.deltaTime;
+        speed -= speed * gm.Drag * Time.deltaTime;
         speed = Mathf.Max(speed, gm.MinSpeed);
 
         // Detect expire
