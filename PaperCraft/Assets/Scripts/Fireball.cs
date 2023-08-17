@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -22,6 +23,9 @@ public class Fireball : MonoBehaviour
     }
 
     private bool canHit = false;
+
+    private float holdTime = 1f;
+    private float timerStart;
 
     private GameControl gm => GameControl.Instance;
 
@@ -49,12 +53,14 @@ public class Fireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        timerStart = Time.realtimeSinceStartup;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.realtimeSinceStartup - timerStart < holdTime) { return; }
+
         // Move
         position += speed * Time.deltaTime * direction;
         speed -= speed * gm.Drag * Time.deltaTime;
@@ -63,6 +69,8 @@ public class Fireball : MonoBehaviour
         // Detect expire
         bool hit = (Destination.Position - position).sqrMagnitude < gm.HitThreshold * gm.HitThreshold;
         if (canHit && !hit){
+            // missed
+            gm.score = Mathf.Max(gm.score - 1, 0);
             gm.ExpireFireball(this);
         }
         canHit = hit;

@@ -33,15 +33,17 @@ public class GameControl : MonoBehaviour
     }
 
     public void ExpireFireball(Fireball fb){
-        score = Mathf.Max(score - 1, 0);
         ActiveFireballs.Remove(fb);
         fb.Expire();
     }
 
     public void CreateFirework(Vector2 pos, float life = 5f){
-        score = Mathf.Min(score + 1, 35);
         Firework fw = Instantiate(FireworkPrefabs[UnityEngine.Random.Range(0, FireworkPrefabs.Count)]);
         fw.Init(pos, life);
+    }
+
+    public void CreateRandomFirework(){
+        CreateFirework(GetEndPosition());
     }
 
     // Start is called before the first frame update
@@ -52,8 +54,21 @@ public class GameControl : MonoBehaviour
 
         while (true){
             yield return new WaitForSeconds(CalcInterval(score));
-            CreateFireball(GetStartPosition(), GetEndPosition());
+            if (score > 25){
+                yield return FireworkShow(score, score * 0.25f);
+                score = 0;
+            } else {
+                CreateFireball(GetStartPosition(), GetEndPosition());
+            }
+            
         }
+    }
+
+    IEnumerator FireworkShow(int count, float time){
+        for (int i = 0; i < count; i++){
+            Invoke(nameof(CreateRandomFirework), UnityEngine.Random.Range(0f, time));
+        }
+        yield return new WaitForSeconds(time);
     }
 
     // Update is called once per frame
@@ -73,13 +88,13 @@ public class GameControl : MonoBehaviour
     //    {3f, 3f, 3f, 2.9f, 2.8f, 2.6f, 2.4f, 2.2f, 2.0f, 1.8f, 1.6f, 1.4f, 1.2f, 1.1f, 1f};
     private float CalcInterval(int score){
         if (score < 5) return 3f;
-        else if (score < 15) return Mathf.Lerp(3f, 1f, (score - 5) / 10f);
+        else if (score < 15) return Mathf.Lerp(2.7f, 1f, (score - 5) / 10f);
         else if (score < 25) return Mathf.Lerp(1f, 0.5f, (score - 15) / 10f);
         else return 0.5f;
     }
 
     private Vector2 GetStartPosition(){
-        return new Vector2(UnityEngine.Random.Range(Range.xMin, Range.xMax), Range.yMin);
+        return new Vector2(UnityEngine.Random.Range(Range.xMin, Range.xMax), Range.yMin - 2f);
     }
 
     private Vector2 GetEndPosition(){

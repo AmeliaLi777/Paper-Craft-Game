@@ -276,9 +276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02fe7691902d844e84fdd5ef7b4e1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnAwake: 1
+  playOnAwake: 0
   loopCheck: 0
-  waitTime: 0
+  waitTime: 1
   loopWaitTime: 5
   sound01: {fileID: 8300000, guid: ffa2ee8fc1bfa604eb9b7eb9ecfb49ff, type: 3}
 --- !u!82 &824216542135717644

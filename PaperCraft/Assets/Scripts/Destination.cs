@@ -16,6 +16,7 @@ public class Destination : MonoBehaviour
 
     public void OnSuccess(){
         Debug.Log("Hit!");
+        gm.score = Mathf.Min(gm.score + 1, 35);
         gm.CreateFirework(Position, 5f);
         Destroy(transform.parent.gameObject);
     }
