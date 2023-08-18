@@ -320,6 +320,7 @@ MonoBehaviour:
   - {fileID: 7644345994021771473, guid: ab786ae87a0588f40b3ee0224b04e414, type: 3}
   - {fileID: 7394118912144979287, guid: 9d382ecaa777e5e4a917925b0945e06e, type: 3}
   - {fileID: 2608194013790094272, guid: 8bad730901f73de46aecd533a0d5008c, type: 3}
+  COM: COM1
 --- !u!4 &1279704145
 Transform:
   m_ObjectHideFlags: 0

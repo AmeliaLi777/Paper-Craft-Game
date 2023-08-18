@@ -1,4 +1,5 @@
 using System;
+using System.IO.Ports;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,9 @@ public class GameControl : MonoBehaviour
     public GameObject FireballPrefab;
     public List<Firework> FireworkPrefabs;
 
+    public string COM = "COM6";
+    private SerialPort port;
+
     public void CreateFireball(Vector2 pos, Vector2 dest){
         Fireball fb = Instantiate(FireballPrefab).GetComponentInChildren<Fireball>();
         ActiveFireballs.Add(fb);
@@ -52,6 +56,9 @@ public class GameControl : MonoBehaviour
         Vector2 screenMin = MainCamera.ScreenToWorldPoint(Vector3.zero);
         Range = new Rect(screenMin, -2 * screenMin);
 
+        port = new SerialPort(COM, 9600);
+        port?.Open();
+
         while (true){
             yield return new WaitForSeconds(CalcInterval(score));
             if (score > 25){
@@ -75,11 +82,16 @@ public class GameControl : MonoBehaviour
     void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.A)){
+            bool hit = false;
             for (int i = ActiveFireballs.Count - 1; i >= 0; i--)
             {
                 if (ActiveFireballs[i].TryHit()){
                     ActiveFireballs.RemoveAt(i);
+                    hit = true;
                 }
+            }
+            if (hit){
+                port?.Write("a");
             }
         }
     }
